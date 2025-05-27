@@ -1,6 +1,20 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Shadows_Into_Light } from "next/font/google";
+import { Poiret_One } from "next/font/google";
+
+export const shadows = Shadows_Into_Light({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-shadows",
+});
+
+export const bellota = Poiret_One({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-bellota",
+});
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,12 +37,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
-    </html>
+    <html
+  lang="en"
+  className={`${geistSans.variable} ${geistMono.variable} ${shadows.variable} ${bellota.variable}`}
+>
+  <body className="antialiased">
+    {children}
+  </body>
+</html>
   );
 }

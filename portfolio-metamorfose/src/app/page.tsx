@@ -1,11 +1,13 @@
-'use client'
+"use client";
 import { getCategories } from "@/helpers/getCategories";
 import { getFotos } from "@/helpers/getFotos";
 import { useEffect, useState } from "react";
-import {Ifotos, ICategory} from '../types/types'
+import { Ifotos, ICategory } from "../types/types";
 import Image from "next/image";
+import Link from "next/link";
 
-export const FotoComponent: React.FC<{fotos: Ifotos[]}>  = ({fotos}) => {
+{
+  /*export const FotoComponent: React.FC<{fotos: Ifotos[]}>  = ({fotos}) => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
       {fotos.map((foto) => {
@@ -76,4 +78,68 @@ export default function Home() {
       
     </div>
   );
+}*/
 }
+
+export default function Home() {
+  return (
+    <div className="relative">
+      <div className=" flex justify-between items-center">
+        <div className="relative m-3 w-9 h-9 sm:w-9 sm:h-9 md:w-10 md:h-10 lg:w-10 lg:h-10 xl:w-12 xl:h-12 2xl:w-14 2xl:h-14  ">
+          <Image
+            src={"/logo.png"}
+            alt={"metamorfose-logo"}
+            fill
+            className="object-contain animate-pulse"
+          />
+        </div>
+        <Navbar />
+      </div>
+      <div className="absolute w-[30%] h-[120%] border right-0">
+        <Image
+          src={"/camara-fondo.jpg"}
+          alt={"metamorfose-fondo"}
+          fill
+          className="object-contain  z-[-1]"
+        />
+      </div>
+      <h1
+        className="font-[family-name:var(--font-bellota)] font-bold
+      mx-[10%] mt-[50%] text-4xl
+      sm:text-7xl sm:mt-[30%] 
+      md:text-7xl md:mt-[20%] 
+      lg:text-8xl lg:mt-[15%]
+      xl:text-9xl  xl:mt-[15%]
+      2xl:text-9xl 2xl:mt-[16%]
+      z-10
+      "
+      >
+        METAMORFOSE PH
+      </h1>
+      <p className="text-xl mt-2 ml-[20%] font-[family-name:var(--font-shadows)] tracking-widest">
+        Viviendo metamorfosis
+      </p>
+    </div>
+  );
+}
+
+export const Navbar = () => {
+  return (
+    <nav className="font-[family-name:var(--font-shadows)] tracking-widest mr-4 flex justify-end">
+      <ul className="flex gap-4">
+        <Link className="text-white hover:text-gray-400 duration-300" href="/">
+          inicio
+        </Link>
+        <Link className="text-white hover:text-gray-400 duration-300" href="/">
+          portfolio
+        </Link>
+        <Link className="text-white hover:text-gray-400 duration-300" href="/">
+          conoceme
+        </Link>
+        <Link className="text-white hover:text-gray-400 duration-300" href="/">
+          contacto
+        </Link>
+      </ul>
+    </nav>
+  );
+};
