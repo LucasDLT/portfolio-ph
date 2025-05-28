@@ -1,16 +1,16 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
 import { Shadows_Into_Light } from "next/font/google";
 import { Poiret_One } from "next/font/google";
+import "./globals.css";
 
-export const shadows = Shadows_Into_Light({
+const shadows = Shadows_Into_Light({
   subsets: ["latin"],
   weight: "400",
   variable: "--font-shadows",
 });
 
-export const bellota = Poiret_One({
+const bellota = Poiret_One({
   subsets: ["latin"],
   weight: "400",
   variable: "--font-bellota",

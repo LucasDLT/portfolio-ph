@@ -85,22 +85,22 @@ export default function Home() {
   return (
     <div className="relative">
       <div className=" flex justify-between items-center">
-        <div className="relative m-3 w-9 h-9 sm:w-9 sm:h-9 md:w-10 md:h-10 lg:w-10 lg:h-10 xl:w-12 xl:h-12 2xl:w-14 2xl:h-14  ">
+        <div className="relative m-3 w-9 h-9 sm:w-9 sm:h-9 md:w-10 md:h-10 lg:w-10 lg:h-10 xl:w-10 xl:h-10 2xl:w-10 2xl:h-10  ">
           <Image
             src={"/logo.png"}
             alt={"metamorfose-logo"}
             fill
-            className="object-contain animate-pulse"
+            className="object-contain "
           />
         </div>
         <Navbar />
       </div>
-      <div className="absolute w-[30%] h-[120%] border right-0">
+      <div className="absolute w-[25%] h-[119%]  right-6">
         <Image
           src={"/camara-fondo.jpg"}
           alt={"metamorfose-fondo"}
           fill
-          className="object-contain  z-[-1]"
+          className="object-contain border mask-fade animate-pulse z-[-1]"
         />
       </div>
       <h1
@@ -116,9 +116,13 @@ export default function Home() {
       >
         METAMORFOSE PH
       </h1>
-      <p className="text-xl mt-2 ml-[20%] font-[family-name:var(--font-shadows)] tracking-widest">
-        Viviendo metamorfosis
+
+      <div className="mt-2 ml-[20%] flex justify-start items-center gap-[20rem]">
+      <p className="text-2xl font-[family-name:var(--font-shadows)] tracking-widest}">
+        Viviendo metamorfosis.
       </p>
+      <ButtonContact />
+      </div>
     </div>
   );
 }
@@ -143,3 +147,12 @@ export const Navbar = () => {
     </nav>
   );
 };
+
+
+export const ButtonContact = ()=>{
+  return(
+    <button className="font-[family-name:var(--font-bellota)] tracking-widest  p-2 border border-gray-200 rounded hover:bg-gray-300 hover:text-black duration-300 font-bold hover:scale-110 hover:font hover:cursor-pointer">
+      Quiero una sesión 
+    </button>
+  )
+}

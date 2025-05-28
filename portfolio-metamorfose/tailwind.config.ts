@@ -1,6 +1,5 @@
-import { bellota } from "@/app/layout";
 
-module.exports = {
+export default  {
   content: [
     "./app/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
@@ -8,8 +7,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        shadows: ['var(--font-shadows)'],
-        bellota: ['var(--font-bellota)'],
+        shadows: ['shadows)'],
+        bellota: ['bellota'],
       },
     },
   },
