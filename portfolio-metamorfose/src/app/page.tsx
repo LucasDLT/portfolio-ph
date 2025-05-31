@@ -105,7 +105,7 @@ export default function Home() {
       </div>
       <div className="animate-reveal flex justify-center items-center sm:justify-start ">
       <h1
-        style={{ textShadow: "3px 3px 5px #676767" }}
+        style={{ textShadow: "1px 1px 5px #676767,-1px -1px 5px #676767" }}
         className=" 
         font-[family-name:var(--font-bellota)] font-extrabold
       mt-[30%] text-[2.8rem] 
