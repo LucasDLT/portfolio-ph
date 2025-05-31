@@ -39,13 +39,17 @@ body {
   -webkit-mask-composite: destination-in;
 }
 @keyframes fade-right {
-  from {
+  0% {
     opacity: 0;
     transform: translateX(350px);
     
   }
+  80% {
+    opacity: 1;
+    transform: translateX(-15px);
+  }
 
-  to {
+  100% {
     opacity: 1;
     transform: translateX(0);
 
@@ -53,7 +57,7 @@ body {
 }
 
 .fade-right {
-  animation: fade-right 1.5s ease-in-out forwards;
+  animation: fade-right 1.4s ease-in-out forwards;
 }
 @layer utilities {
   .masked-reveal {
