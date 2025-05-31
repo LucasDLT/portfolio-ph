@@ -38,3 +38,62 @@ body {
   mask-composite: intersect;
   -webkit-mask-composite: destination-in;
 }
+@keyframes fade-right {
+  from {
+    opacity: 0;
+    transform: translateX(350px);
+    
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+
+  }
+}
+
+.fade-right {
+  animation: fade-right 1.5s ease-in-out forwards;
+}
+@layer utilities {
+  .masked-reveal {
+    display: inline-block;
+    animation: mask-reveal 2.5s ease-out forwards;
+    -webkit-mask-image: linear-gradient(to left, black 10%, black 100%);
+    mask-image: linear-gradient(to left, black 10%,  transparent 50%, black 100%);
+    -webkit-mask-size: 400% 100%;
+    mask-size: 500% 100%;
+    -webkit-mask-position: right;
+    mask-position: right;
+  }
+
+  @keyframes mask-reveal {
+    to {
+      -webkit-mask-position: left;
+      mask-position: left;
+    }
+  }
+}
+
+.bg-swipe-hover {
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.bg-swipe-hover::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background-color: black; /* Cambia este color según necesites */
+  transition: transform 0.6s ease-in-out;
+  transform: translateX(0);
+  z-index: -1;
+}
+
+.bg-swipe-hover:hover::before {
+  transform: translateX(100%);
+}

@@ -10,6 +10,7 @@ export default  {
         shadows: ['shadows)'],
         bellota: ['bellota'],
       },
+      
     },
   },
   plugins: [],
