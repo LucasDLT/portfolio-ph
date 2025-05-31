@@ -105,7 +105,7 @@ export default function Home() {
       </div>
       <div className="animate-reveal flex justify-center items-center sm:justify-start ">
       <h1
-        style={{ textShadow: "3px 3px 10px #676767" }}
+        style={{ textShadow: "3px 3px 5px #676767" }}
         className=" 
         font-[family-name:var(--font-bellota)] font-extrabold
       mt-[30%] text-[2.8rem] 
@@ -125,7 +125,7 @@ export default function Home() {
           Viviendo metamorfosis.
         </p>
       </div>
-        <div className="flex justify-center items-center">
+        <div className="flex justify-center items-center fade-button-in">
         <ButtonContact />
         </div>
         
@@ -146,7 +146,7 @@ export const Navbar = () => {
   };
 
   return (
-    <nav className="relative z-10 font-[family-name:var(--font-shadows)] tracking-widest mt-[-8] mr-2 flex justify-end masked-reveal">
+    <nav className="relative z-10 font-[family-name:var(--font-shadows)] tracking-widest mt-[-8] mr-2 flex justify-end text-[0.9rem] ">
       <button
         onClick={openMenu}
         className={`hover:cursor-pointer top-6 text-white hover:text-gray-400 transition-all duration-300 ease-in-out text-xl mr-6 w-6 sm:hidden animate-pulse`}
@@ -184,8 +184,10 @@ export const Navbar = () => {
 
 export const ButtonContact = () => {
   return (
-    <button className="absolute text-center font-[family-name:var(--font-bellota)] tracking-widest w-40  h-10 sm:w-50 sm:h-15 lg:w-45 lg:h-15 xl:w-50 xl:h-15 2xl:w-50  2xl:h-15  mt-[70%]  p-2 border border-gray-200 rounded bg-white text-black hover:text-white duration-300 font-extrabold hover:scale-102 hover:font hover:cursor-pointer z-50 bg-swipe-hover sm:mt-[10%] mask-reveal">
+      
+    <button className="absolute font-[family-name:var(--font-bellota)] tracking-widest w-45 h-15 sm:w-50 sm:h-12 lg:w-45 lg:h-12 xl:w-50 xl:h-12 2xl:w-50  2xl:h-12  mt-[70%]  p-2  rounded bg-white text-black hover:text-white transition-all ease-in-out duration-600 font-extrabold hover:scale-102 hover:font-bold hover:cursor-pointer z-50 bg-swipe-hover sm:mt-[6%] masked-reveal">
       Quiero una sesión
     </button>
+    
   );
 };
