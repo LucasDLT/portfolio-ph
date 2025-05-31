@@ -75,6 +75,24 @@ body {
   }
 }
 
+@keyframes fade-button-in {
+  0%{
+    opacity: 0;
+    transform:translateY(133px)
+  }
+  80%{
+    opacity: 1;
+    transform: translateY(-10px)
+
+  }
+  100%{
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+.fade-button-in{
+  animation: fade-button-in 1.5s cubic-bezier(0.22, 1, 0.36, 1)  forwards;
+}
 .bg-swipe-hover {
   position: relative;
   overflow: hidden;
@@ -97,3 +115,4 @@ body {
 .bg-swipe-hover:hover::before {
   transform: translateX(100%);
 }
+
