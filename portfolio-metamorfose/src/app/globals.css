@@ -82,7 +82,7 @@ body {
 @keyframes fade-button-in {
   0%{
     opacity: 0;
-    transform:translateY(69px)
+    transform:translateY(90px)
   }
   80%{
     opacity: 1;
