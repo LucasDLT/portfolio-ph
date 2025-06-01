@@ -39,7 +39,7 @@ export default function RootLayout({
   return (
     <html
   lang="en"
-  className={`scroll-smooth ${geistSans.variable} ${geistMono.variable} ${shadows.variable} ${bellota.variable}`}
+  className={`sm:scroll-smooth ${geistSans.variable} ${geistMono.variable} ${shadows.variable} ${bellota.variable}`}
 >
   <body className="antialiased">
     {children}
