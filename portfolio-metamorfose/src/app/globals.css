@@ -120,3 +120,18 @@ body {
   transform: translateX(100%);
 }
 
+/*estilos para el scroll*/
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+  
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #080808;
+  border-radius: 5px;
+  border: #ededed solid 1px;
+  scroll-behavior: smooth;
+  transition: 0.5s ease-in-out;
+}
