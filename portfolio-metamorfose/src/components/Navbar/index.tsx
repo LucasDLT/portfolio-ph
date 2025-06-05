@@ -19,21 +19,21 @@ export const Navbar = () => {
     initial={{ opacity: 1, y: 0 }}
     animate={isOpen ? { opacity: 1, y: 0 } : { }}
     >  
-    <nav className={`fixed z-100 font-[family-name:var(--font-shadows)] tracking-widest flex flex-col justify-center items-end text-[0.9rem] right-2 top-4 masked-reveal`}>
+    <nav className={`fixed z-100 font-[family-name:var(--font-shadows)] tracking-widest flex flex-col justify-center items-end text-[0.9rem] right-2 top-4 masked-reveal h-40`}>
       <button
         onClick={openMenu}
-        className={`hover:cursor-pointer text-white hover:text-gray-400 transition-all duration-300 ease-in-out text-xl  w-6 sm:hidden animate-pulse`}
+        className={`hover:cursor-pointer text-white hover:text-gray-400 transition-all duration-300 ease-in-out text-xl  w-6 sm:hidden animate-pulse bg-black absolute left-10`}
       >
         {labelButton}
       </button>
       <ul
-        className={`z-20 absolute gap-3 transform transition-all duration-300 ease-in-out
+        className={`z-20 gap-3 transform transition-all duration-300 ease-in-out
   flex flex-col justify-center items-center 
-  sm:static sm:flex-row sm:opacity-100 sm:pointer-events-auto 
+  sm:static sm:flex-row sm:opacity-100 sm:pointer-events-auto
   ${
     isOpen
-      ? "translate-y-20 mr-1 justify-center items-end opacity-100 pointer-events-auto"
-      : "translate-y-15 mr-1 justify-center items-end opacity-0 pointer-events-none"
+      ? "translate-y-8 mr-1 justify-center items-end opacity-100 pointer-events-auto"
+      : "translate-y-[-100%] mr-1 justify-center items-end opacity-0 pointer-events-none"
   }
   sm:translate-y-0`}
       >
