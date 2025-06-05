@@ -1,26 +1,53 @@
 import { Ifotos } from "@/types/types";
 import Image from "next/image";
+import { CategoryComponent } from "../CategorySection";
+import { useEffect, useRef, useState } from "react";
+import { useInView, motion } from "framer-motion";
 
 export const FotoComponent: React.FC<{ fotos: Ifotos[] }> = ({ fotos }) => {
+  const ref = useRef(null);
+
+  const estaEnVista = useInView(ref, { once: false });
+  const [animar, setAnimar] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (estaEnVista) {
+      setAnimar(true);
+    } else {
+      setAnimar(false);
+    }
+  }, [estaEnVista]);
+
   return (
-    <div  id="portfolio" className="h-[100vh] flex flex-col items-center mt-30">
-      <h2 className="font-[family-name:var(--font-bellota)] tracking-widest text-2xl">Portfolio</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-1 overflow-y-scroll rounded h-[90vh]">
-        {fotos.map((foto) => {
-          return (
-            <div key={foto.id} className="relative">
-              <div className="w-90 h-70">
+    <motion.section>
+      <div
+        ref={ref}
+        id="portfolio"
+        className="h-[100vh] flex items-center mt-1"
+      >
+        <h2 className="font-[family-name:var(--font-bellota)] mx-4 text-2xl flex justify-center items-center flex-col">
+          {"Portfolio".split("").map((letra, i) => (
+            <span key={i} className={`${animar ? "masked-reveal" : ""}`}>
+              {letra}
+            </span>
+          ))}
+        </h2>
+        <div ref={ref} className={`grid grid-cols-3 gap-1 overflow-y-scroll rounded h-[90vh] ${animar ? "fade-right" : ""}`}>
+          {fotos.map((foto) => {
+            return (
+              <div key={foto.id} className="relative w-[25rem] h-[20rem]">
                 <Image
                   src={foto.url}
                   alt={foto.title}
                   fill
-                  className="object-cover"
+                  className="object-cover fade-in"
                 />
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
+        <CategoryComponent />
       </div>
-    </div>
+    </motion.section>
   );
 };

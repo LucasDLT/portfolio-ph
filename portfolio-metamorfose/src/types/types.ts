@@ -6,7 +6,7 @@ export interface Ifotos {
   createdAt?: string;
   active?: boolean;
   category?: ICategory | null | undefined;
-  globalOrder?: number;
+  globalOrder: number;
   categoryOrder?: number;
 }
 

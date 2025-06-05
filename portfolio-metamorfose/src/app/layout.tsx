@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Shadows_Into_Light } from "next/font/google";
 import { Poiret_One } from "next/font/google";
+import { ContextProvider } from "@/context/context";
 import "./globals.css";
 
 const shadows = Shadows_Into_Light({
@@ -41,9 +42,12 @@ export default function RootLayout({
   lang="en"
   className={`sm:scroll-smooth ${geistSans.variable} ${geistMono.variable} ${shadows.variable} ${bellota.variable}`}
 >
+<ContextProvider>
   <body className="antialiased">
     {children}
   </body>
+  </ContextProvider>
+
 </html>
   );
 }
