@@ -32,7 +32,7 @@ export const FotoComponent: React.FC<{ fotos: Ifotos[] }> = ({ fotos }) => {
             </span>
           ))}
         </h2>
-        <div ref={ref} className={`grid grid-cols-3 gap-1 overflow-y-scroll rounded h-[90vh] ${animar ? "fade-right" : ""}`}>
+        <div ref={ref} className={`grid grid-cols-3 gap-1 overflow-y-scroll rounded h-[90vh] ${animar ? "fade-left" : ""}`}>
           {fotos.map((foto) => {
             return (
               <div key={foto.id} className="relative w-[25rem] h-[20rem]">

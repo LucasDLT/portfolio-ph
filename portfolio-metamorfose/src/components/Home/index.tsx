@@ -5,7 +5,7 @@ import { ButtonContact } from "../ButtonContact";
 
 
 export function HomeComponent() {
-   const ref = useRef(null);
+  const ref = useRef(null);
   const estaEnVista = useInView(ref, { once: false,  });
   const [animar, setAnimar] = useState<boolean>(false);
 
@@ -15,7 +15,8 @@ export function HomeComponent() {
     } else {
       setAnimar(false); 
     }
-  }, [estaEnVista]);  return (
+  }, [estaEnVista]);  
+  return (
     <motion.section
       ref={ref}
       initial={{ opacity: 1, y: 0 }}
@@ -42,7 +43,7 @@ export function HomeComponent() {
       </div>
       <div className="animate-reveal flex justify-center items-center sm:justify-start ">
         <h1
-          style={{ textShadow: "1px 1px 5px #676767,-1px -1px 5px #676767" }}
+          style={{ textShadow: "1px 1px 5px #67676784,-1px -1px 5px #4946461b" }}
           className={`
         font-[family-name:var(--font-bellota)] font-extrabold
       mt-[30%] text-[2.8rem] 

@@ -148,3 +148,48 @@ body {
 .fade-in {
   animation: fade-in 1s ease-in-out forwards;
 }
+
+@keyframes fade-top {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-top {
+  animation: fade-top 1s ease-in-out forwards;
+}
+
+@keyframes fade-bottom {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-bottom {
+  animation: fade-bottom 1s ease-in-out forwards;
+}
+
+@keyframes fade-left {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.fade-left {
+  animation: fade-left 1s ease-in-out forwards;
+}
