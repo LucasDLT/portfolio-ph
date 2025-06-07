@@ -21,7 +21,7 @@ const [activo, setActivo] = useState<string | null>(null);
         setFotos(category.images); // lógica original
         setActivo(category.name);  // ← nuevo: guardar cuál está activo
       }}
-      className={`font-[family-name:var(--font-bellota)] tracking-widest transition-opacity duration-300 ${
+      className={`font-[family-name:var(--font-bellota)] tracking-wider transition-opacity duration-300 ${
         activo === category.name ? "opacity-100" : "opacity-60"
       }`}
     >

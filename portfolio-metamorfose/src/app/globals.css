@@ -19,8 +19,14 @@ body {
   background: var(--background);
   color: var(--foreground);
 }
-
+.fade-to-top {
+  background: linear-gradient(to top, transparent, black);
+}
+.fade-to-black {
+  background: linear-gradient(to bottom, transparent, black);
+}
 .mask-fade {
+  z-index: 0;
   mask-image: linear-gradient(
     to bottom,
     transparent 0%,
@@ -33,6 +39,24 @@ body {
     transparent 0%,
     black 20%,
     black 80%,
+    transparent 100%
+  );
+  mask-composite: intersect;
+  -webkit-mask-composite: destination-in;
+}
+.mask-fade-mini {
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 10%,
+    black 80%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 10%,
+    black 90%,
     transparent 100%
   );
   mask-composite: intersect;
