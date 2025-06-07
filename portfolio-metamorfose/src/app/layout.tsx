@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Shadows_Into_Light } from "next/font/google";
 import { Poiret_One } from "next/font/google";
 import { ContextProvider } from "@/context/context";
+import { Toaster } from "sonner";
 import "./globals.css";
 
 const shadows = Shadows_Into_Light({
@@ -46,6 +47,7 @@ export default function RootLayout({
   <body className="antialiased">
     {children}
   </body>
+  <Toaster />
   </ContextProvider>
 
 </html>

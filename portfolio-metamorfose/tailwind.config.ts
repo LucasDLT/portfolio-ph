@@ -5,10 +5,14 @@ export default  {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {
+    extend:
+     {
       fontFamily: {
         shadows: ['shadows)'],
         bellota: ['bellota'],
+      },
+      backgroundImage: {
+        'fade-to-black': 'linear-gradient(to bottom, transparent, black)',
       },
       
     },
