@@ -1,10 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { IMail, Ierror } from "@/types/types";
 import { validateForm } from "@/helpers/validateForm";
 import Image from "next/image";
 import { toast } from "sonner";
 import BackgroundEntrance from "@/components/BackgroundAnimate";
 
+// Tipado global de reCAPTCHA
+declare global {
+  interface Window {
+    grecaptcha: {
+      ready: (cb: () => void) => void;
+      execute: (
+        siteKey: string,
+        options: { action: string }
+      ) => Promise<string>;
+    };
+  }
+}
 export const ContactForm = () => {
   const [errors, setErrors] = useState<Ierror>({
     name: "",
@@ -18,11 +30,48 @@ export const ContactForm = () => {
     phone: "",
     message: "",
   });
-
+ 
+  const [recaptchaReady, setRecaptchaReady] = useState(false);
 
   const PORT = process.env.NEXT_PUBLIC_API_URL;
+  const SITE_KEY_RECAPTCHA = process.env.NEXT_PUBLIC_SITE_KEY_RECAPTCHA!;
 
+  // ---------------- Cargar script de reCAPTCHA ----------------
+  useEffect(() => {
+    if (!SITE_KEY_RECAPTCHA) {
+      console.warn("No existe NEXT_PUBLIC_SITE_KEY_RECAPTCHA en el env.");
+      return;
+    }
 
+    if (window.grecaptcha) {
+      setRecaptchaReady(true);
+      return;
+    }
+
+    const script = document.createElement("script");
+    script.src = `https://www.google.com/recaptcha/api.js?render=${SITE_KEY_RECAPTCHA}`;
+    script.async = true;
+    script.defer = true;
+
+    script.onload = () => {
+      // Esperar a que grecaptcha esté listo
+      window.grecaptcha.ready(() => {
+        setRecaptchaReady(true);
+      });
+    };
+
+    script.onerror = () => {
+      console.error("Error cargando el script de reCAPTCHA");
+      setRecaptchaReady(false);
+    };
+
+    document.head.appendChild(script);
+
+    // cleanup opcional
+    return () => {
+      // document.head.removeChild(script);
+    };
+  }, [SITE_KEY_RECAPTCHA]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -34,6 +83,51 @@ export const ContactForm = () => {
     const updatedForm = { ...form, [name]: value };
     const validationErrors = validateForm(updatedForm);
     setErrors(validationErrors);
+  };
+
+  // ---------------- Obtener token de reCAPTCHA ----------------
+  const getRecaptchaToken = (
+    action = "contact",
+    timeoutMs = 8000
+  ): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      if (!window.grecaptcha || !window.grecaptcha.execute) {
+        return reject(new Error("reCAPTCHA no está listo"));
+      }
+
+      let finished = false;
+      const timer = setTimeout(() => {
+        if (!finished) {
+          finished = true;
+          reject(new Error("reCAPTCHA timeout"));
+        }
+      }, timeoutMs);
+
+      try {
+        window.grecaptcha.ready(() => {
+          window.grecaptcha
+            .execute(SITE_KEY_RECAPTCHA, { action })
+            .then((token: string) => {
+              if (finished) return;
+              finished = true;
+              clearTimeout(timer);
+              resolve(token);
+            })
+            .catch((err: Error) => {
+              if (finished) return;
+              finished = true;
+              clearTimeout(timer);
+              reject(err);
+            });
+        });
+      } catch (err) {
+        if (!finished) {
+          finished = true;
+          clearTimeout(timer);
+          reject(err);
+        }
+      }
+    });
   };
 
   const handleTextAreaChange = (e: React.FocusEvent<HTMLTextAreaElement>) => {
@@ -57,17 +151,30 @@ export const ContactForm = () => {
       return; // Detiene el envío
     }
     const { name, email, phone, message } = form;
-    const formData = { name, email, phone, message };
 
     try {
+      if (!recaptchaReady) {
+        return;
+      }
+
+      const token = await getRecaptchaToken("contact");
+
+      const payload = {
+        name,
+        email,
+        phone,
+        message,
+        recaptcha: token,
+      };
+      console.log("Payload enviado al backend:", payload);
+
       const response = await fetch(`${PORT}/email`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(payload),
       });
-
       if (!response.ok) {
         throw new Error("Error en la petición");
       }
@@ -91,10 +198,11 @@ export const ContactForm = () => {
   };
 
   return (
-      
-      
-      <BackgroundEntrance>
-      <div id="contacto" className="h-[90vh] z-100 flex items-start justify-evenly ">
+    <BackgroundEntrance>
+      <div
+        id="contacto"
+        className="h-[90vh] z-100 flex items-start justify-evenly "
+      >
         <form
           onSubmit={handleSubmit}
           className={`fade-to-black flex flex-col justify-between gap-2 p-4  h-[30rem] w-96 mt-30 font-[family-name:var(--font-bellota)]`}
@@ -165,10 +273,8 @@ export const ContactForm = () => {
         </form>
 
         <section
-        
           className={`relative fade-to-top flex flex-col items-center justify-between gap-2 p-4 rounded h-[30rem] w-96 mt-30 font-[family-name:var(--font-bellota)] `}
         >
-
           <p>
             Lorem ipsum, dolor sit amet consectetur adipisicing elit.
             Consequatur mollitia magni veniam repellendus ipsam libero quam
@@ -209,7 +315,6 @@ export const ContactForm = () => {
             </a>
           </div>
         </section>
-
       </div>
       <footer className="flex justify-center items-center text-white font-[family-name:var(--font-bellota)] font-2xl">
         <p>© 2025 Metamorfose-ph. Todos los derechos reservados.</p>
