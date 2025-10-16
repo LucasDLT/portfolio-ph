@@ -5,9 +5,14 @@ export const Navbar = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [labelButton, setLabelButton] = useState<string>("");
 
-  useEffect(() => {
-    isOpen ? setLabelButton(`x`) : setLabelButton(`≡`);
-  }, [isOpen]);
+useEffect(() => {
+  if (isOpen) {
+    setLabelButton("x");
+  } else {
+    setLabelButton("≡");
+  }
+}, [isOpen]);
+
   const openMenu = () => {
     setIsOpen(!isOpen);
     
