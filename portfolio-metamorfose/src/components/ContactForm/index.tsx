@@ -143,12 +143,12 @@ export const ContactForm = () => {
     const validationErrors = validateForm(form);
     setErrors(validationErrors);
 
-    // 🔒 Si hay errores, no sigas
+    // control de errores
     const hasErrors = Object.values(validationErrors).some(
       (error) => error !== ""
     );
     if (hasErrors) {
-      return; // Detiene el envío
+      return; 
     }
     const { name, email, phone, message } = form;
 
@@ -201,7 +201,7 @@ export const ContactForm = () => {
     <BackgroundEntrance>
       <div
         id="contacto"
-        className="h-[90vh] z-100 flex items-start justify-evenly "
+        className="h-[90vh] z-100 flex flex-col items-center justify-evenly "
       >
         <form
           onSubmit={handleSubmit}
@@ -271,23 +271,7 @@ export const ContactForm = () => {
             Enviar
           </button>
         </form>
-
-        <section
-          className={`relative fade-to-top flex flex-col items-center justify-between gap-2 p-4 rounded h-[30rem] w-96 mt-30 font-[family-name:var(--font-bellota)] `}
-        >
-          <p>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-            Consequatur mollitia magni veniam repellendus ipsam libero quam
-            doloremque. Consequuntur sint deserunt nihil blanditiis vero impedit
-            qui ad, dignissimos culpa, perspiciatis ut.
-          </p>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam
-            tempora amet enim excepturi obcaecati in incidunt veritatis, fugit
-            alias pariatur laboriosam possimus doloribus totam aperiam
-            recusandae vel, corporis ad dolores.
-          </p>
-          <div className="flex justify-evenly items-center gap-1 w-80 ">
+          <div className="flex justify-center items-center gap-10 ">
             <a
               href="https://www.instagram.com/metamorfose.ph/"
               target="_blank"
@@ -314,7 +298,7 @@ export const ContactForm = () => {
               ></Image>
             </a>
           </div>
-        </section>
+
       </div>
       <footer className="flex justify-center items-center text-white font-[family-name:var(--font-bellota)] font-2xl">
         <p>© 2025 Metamorfose-ph. Todos los derechos reservados.</p>

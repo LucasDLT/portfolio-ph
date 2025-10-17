@@ -23,7 +23,7 @@ export default function BackgroundEntrance({ children }: Props) {
   }, [estaEnVista]);
 
   return (
-    <div ref={ref} className="mt-1 relative w-full h-screen overflow-hidden mask-fade-mini">
+    <div ref={ref} className="mt-1 relative h-screen overflow-hidden mask-fade-mini">
       {/* Fondo animado */}
       {animar && (
         <>
