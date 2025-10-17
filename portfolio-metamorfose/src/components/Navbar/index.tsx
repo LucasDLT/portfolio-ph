@@ -15,9 +15,7 @@ useEffect(() => {
 
   const openMenu = () => {
     setIsOpen(!isOpen);
-    
-    console.log(isOpen);
-  };
+    };
 
   return (
     <motion.section

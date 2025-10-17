@@ -18,8 +18,8 @@ const [activo, setActivo] = useState<string | null>(null);
     <button
       onClick={(e) => {
         e.preventDefault();
-        setFotos(category.images); // lógica original
-        setActivo(category.name);  // ← nuevo: guardar cuál está activo
+        setFotos(category.images); 
+        setActivo(category.name);  
       }}
       className={`font-[family-name:var(--font-bellota)] tracking-wider transition-opacity duration-300 ${
         activo === category.name ? "opacity-100" : "opacity-60"
@@ -34,4 +34,3 @@ const [activo, setActivo] = useState<string | null>(null);
   );
 };
 
-//tengo que hacer un estado local o global para comunicarle desde este componente al fotoscomponent o biceversa buscar como seria, tal vez con un contexto para comunicarlos, y pasarle las fotos dentro de cada categorias a setFotos del fotoscomponent asi cada vez que se presione uno de estas categorias se actualizan las fotos y agregar un boton por default que cargue fotos nuevamente. 

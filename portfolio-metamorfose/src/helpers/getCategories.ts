@@ -9,7 +9,6 @@ export const getCategories = async () => {
             throw new Error("Error en la peticion");
         }
         const data = await response.json();
-        console.log(data);
         return data;
     } catch (error) {
         console.log(error);
