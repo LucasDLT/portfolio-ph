@@ -1,4 +1,3 @@
-// components/BackgroundEntrance.tsx
 'use client';
 
 import {  useInView, motion } from 'framer-motion';
@@ -23,8 +22,7 @@ export default function BackgroundEntrance({ children }: Props) {
   }, [estaEnVista]);
 
   return (
-    <div ref={ref} className="mt-1 relative h-screen overflow-hidden mask-fade-mini">
-      {/* Fondo animado */}
+    <div ref={ref} className="mt-1 relative h-screen overflow-hidden mask-fade-mini ">
       {animar && (
         <>
           <motion.div
@@ -42,7 +40,6 @@ export default function BackgroundEntrance({ children }: Props) {
         </>
       )}
 
-      {/* Contenido encima del fondo */}
       <div className="relative z-10 h-full">{children}</div>
     </div>
   );

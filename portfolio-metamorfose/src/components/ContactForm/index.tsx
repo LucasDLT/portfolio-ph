@@ -67,25 +67,21 @@ export const ContactForm = () => {
 
     document.head.appendChild(script);
 
-    // cleanup opcional
     return () => {
-      // document.head.removeChild(script);
+      document.head.removeChild(script);
     };
   }, [SITE_KEY_RECAPTCHA]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
-    // Actualizar el form
     setForm((prev) => ({ ...prev, [name]: value }));
 
-    // Validar en tiempo real
     const updatedForm = { ...form, [name]: value };
     const validationErrors = validateForm(updatedForm);
     setErrors(validationErrors);
   };
 
-  // ---------------- Obtener token de reCAPTCHA ----------------
   const getRecaptchaToken = (
     action = "contact",
     timeoutMs = 8000
@@ -143,7 +139,6 @@ export const ContactForm = () => {
     const validationErrors = validateForm(form);
     setErrors(validationErrors);
 
-    // control de errores
     const hasErrors = Object.values(validationErrors).some(
       (error) => error !== ""
     );
@@ -183,7 +178,6 @@ export const ContactForm = () => {
       console.log(data);
       toast.success("Correo enviado con exito");
 
-      // Limpiar formulario
       setForm({ name: "", email: "", phone: "", message: "" });
       setErrors({
         name: "",
@@ -271,7 +265,7 @@ export const ContactForm = () => {
             Enviar
           </button>
         </form>
-          <div className="flex justify-center items-center gap-10 ">
+          <div className="flex justify-center items-center gap-10 p-2">
             <a
               href="https://www.instagram.com/metamorfose.ph/"
               target="_blank"
