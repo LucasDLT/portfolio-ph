@@ -26,7 +26,7 @@ export const AboutComponent = () => {
         <h1 className={`font-[family-name:var(--font-bellota)] mx-4 text-8xl flex justify-center items-center flex-col text-center ${animar ?` fade-bottom` : ""} `}>
           Mi mundo en pocas palabras
         </h1>
-        <section className="text-white text-center h-full w-[50rem] flex items-center">
+        <section className="text-white text-center h-full md:w-[50rem] flex items-center">
           <p className={`font-semibold font-[family-name:var(--font-bellota)] tracking-widest ${animar ?` fade-bottom` : ""}`}>
             ...Nacida en Brasil, la naturaleza siempre fue parte de mi esencia.
             Desde pequeña, el arte fue mi refugio: dibujar, crear, observar el
