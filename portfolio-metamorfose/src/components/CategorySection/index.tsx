@@ -2,6 +2,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { Context } from "@/context/context";
 import { motion, AnimatePresence } from "framer-motion";
 import { HiOutlineFilter, HiOutlineChevronDown } from "react-icons/hi";
+import { ICategory } from "@/types/types";
 
 export const CategoryComponent: React.FC = () => {
   const { categorias, setFotos, prevFotos } = useContext(Context);
@@ -34,7 +35,7 @@ export const CategoryComponent: React.FC = () => {
     setOpen(false);
   };
 
-  const handleCategory = (category: any) => {
+  const handleCategory = (category: ICategory) => {
     setFotos(category.images);
     setActivo(category.name);
     setOpen(false);
@@ -74,7 +75,7 @@ export const CategoryComponent: React.FC = () => {
                 PORTFOLIO
               </button>
 
-              {categorias.map((category: any) => (
+              {categorias.map((category: ICategory) => (
                 
                 <button
                   key={category.id}
