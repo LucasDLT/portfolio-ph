@@ -5,48 +5,46 @@ import { useEffect, useRef, useState } from "react";
 import { useInView, motion } from "framer-motion";
 
 export const FotoComponent: React.FC<{ fotos: Ifotos[] }> = ({ fotos }) => {
-  const ref = useRef(null);
-
-  const estaEnVista = useInView(ref, { once: false });
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const estaEnVista = useInView(containerRef, { once: false });
   const [animar, setAnimar] = useState<boolean>(false);
 
   useEffect(() => {
-    if (estaEnVista) {
-      setAnimar(true);
-    } else {
-      setAnimar(false);
-    }
+    setAnimar(estaEnVista);
   }, [estaEnVista]);
 
   return (
     <motion.section>
       <div
-        ref={ref}
+        ref={containerRef}
         id="portfolio"
-        className="h-[100vh] flex items-center mt-1 mask-fade z-0 bg-zinc-900"
+        className="bg-zinc-900 text-white min-h-screen p-4 md:p-8"
       >
-        <h2 className="font-[family-name:var(--font-bellota)] mx-4 text-2xl flex justify-center items-center flex-col">
-          {"Portfolio".split("").map((letra, i) => (
-            <span key={i} className={`${animar ? "masked-reveal" : ""}`}>
-              {letra}
-            </span>
-          ))}
-        </h2>
-        <div ref={ref} className={`z-10 grid grid-cols-3 gap-1 overflow-y-scroll rounded h-[90vh] ${animar ? "fade-left" : ""}`}>
+        <div className="mb-4 flex items-center justify-between relative">
+          <h2 className="font-[family-name:var(--font-bellota)] text-2xl md:text-3xl">
+            {"Portfolio".split("").join("")}
+          </h2>
+
+          <CategoryComponent />
+        </div>
+
+        <div
+          className={`z-10 grid grid-cols-3 gap-1 md:grid-cols-3 lg:grid-cols-4 ${animar ? "fade-left" : ""}`}
+        >
           {fotos.map((foto) => {
             return (
-              <div key={foto.id} className="relative w-[25rem] h-[20rem]">
+              <div key={foto.id} className="relative w-full aspect-square overflow-hidden rounded-sm">
                 <Image
                   src={foto.url}
                   alt={foto.title}
                   fill
-                  className="object-cover fade-in"
+                  sizes="(max-width: 640px) 33vw, (max-width: 1024px) 33vw, 25vw"
+                  className="object-cover transform transition-transform duration-300 hover:scale-105"
                 />
               </div>
             );
           })}
         </div>
-        <CategoryComponent />
       </div>
     </motion.section>
   );
