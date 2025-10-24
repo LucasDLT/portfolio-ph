@@ -20,7 +20,7 @@ export const FotoComponent: React.FC<{ fotos: Ifotos[] }> = ({ fotos }) => {
         id="portfolio"
         className="bg-zinc-900 text-white min-h-screen p-4 md:p-8"
       >
-        <div className="mb-4 flex items-center justify-between relative">
+        <div className="mb-4 flex items-center justify-evenly relative">
           <h2 className="font-[family-name:var(--font-bellota)] text-2xl md:text-3xl">
             {"Portfolio".split("").join("")}
           </h2>
