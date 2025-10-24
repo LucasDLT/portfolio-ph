@@ -62,14 +62,14 @@ export const CategoryComponent: React.FC = () => {
             initial={{ opacity: 0, y: -6 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -6 }}
-            className="absolute top-full right-0 mt-2 z-50 bg-zinc-800/95 border border-white/5 rounded-lg p-2 shadow-lg w-[min(360px,95vw)] max-h-[60vh] overflow-auto"
+            className="absolute top-full left-[-4rem] mt-2 z-50 bg-zinc-800/95 border border-white/5 rounded-lg p-2 shadow-lg w-60 max-h-[60vh] overflow-auto"
             role="menu"
             aria-label="Panel de categorías"
           >
             <div className="flex flex-col gap-1">
               <button
                 onClick={handleAll}
-                className={`text-left px-3 py-2 rounded text-sm ${activo === "PORTFOLIO" ? "bg-white/6" : "bg-transparent"}`}
+                className={`text-center px-3 py-2 rounded text-sm ${activo === "PORTFOLIO" ? "bg-white/6" : "bg-transparent"}`}
                 role="menuitem"
               >
                 PORTFOLIO
@@ -80,7 +80,7 @@ export const CategoryComponent: React.FC = () => {
                 <button
                   key={category.id}
                   onClick={() => handleCategory(category)}
-                  className={`text-left px-3 py-2 rounded text-sm ${activo === category.name ? "bg-white/6" : "bg-transparent"}`}
+                  className={`text-center px-3 py-2 rounded text-sm cursor-pointer ${activo === category.name ? "bg-white/6" : "bg-transparent"}`}
                   role="menuitem"
                 >
                   {category.name}
