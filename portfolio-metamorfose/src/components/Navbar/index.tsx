@@ -3,15 +3,12 @@ import { useState, useEffect } from "react";
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [labelButton, setLabelButton] = useState<string>("");
 
 useEffect(() => {
   if (isOpen) {
-    setLabelButton("x");
     document.body.classList.add("overflow-hidden");
 
   } else {
-    setLabelButton("≡");
     document.body.classList.remove("overflow-hidden");
   }
   return () => {
