@@ -219,7 +219,5 @@ body {
 }
 
 .grecaptcha-badge {
-  bottom: 80px !important; /* lo subís para no tapar footer o botón */
-  right: 10px !important;  /* podés pasarlo al otro lado si querés */
-  z-index: 50 !important;  /* aseguras que no tape modales */
+  visibility: hidden;
 }
