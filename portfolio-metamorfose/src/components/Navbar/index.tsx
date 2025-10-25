@@ -25,11 +25,11 @@ useEffect(() => {
     initial={{ opacity: 1, y: 0 }}
     animate={isOpen ? { opacity: 1, y: 0 } : { }}
     >  
-<nav className="fixed top-0 left-0 w-screen z-[120] font-[family-name:var(--font-shadows)] tracking-widest text-[0.9rem]">
+<nav className="fixed top-4 left-[-2rem] w-screen z-[120] font-[family-name:var(--font-shadows)] tracking-widest text-[0.9rem]">
   {/* Botón hamburguesa - Mobile */}
   <button
     onClick={openMenu}
-    className={ `sm:hidden text-white bg-zinc-900 rounded p-2 m-4 text-xl z-[110] fixed top-0 right-0 ${isOpen ? "hidden" : ""} `}
+    className={ `sm:hidden text-white bg-white/5 rounded p-2 m-4 text-xl z-[110] fixed top-0 right-0 ${isOpen ? "hidden" : ""} `}
   >
     ≡
   </button>
