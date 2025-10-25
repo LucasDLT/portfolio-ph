@@ -6,6 +6,7 @@ import { FotoComponent } from "@/components/PhotoSection";
 import { Navbar } from "@/components/Navbar";
 import { AboutComponent } from "@/components/About";
 import { ContactForm } from "@/components/ContactForm";
+import { Footer } from "@/components/Footer";
 
 export default function Home() {
   const { fotos } = useContext(Context);
@@ -17,6 +18,7 @@ export default function Home() {
       <FotoComponent fotos={fotos} />
       <AboutComponent />
       <ContactForm />
+      <Footer />
     </>
   );
 }

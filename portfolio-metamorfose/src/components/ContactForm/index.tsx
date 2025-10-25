@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { IMail, Ierror } from "@/types/types";
 import { validateForm } from "@/helpers/validateForm";
-import Image from "next/image";
 import { toast } from "sonner";
 import BackgroundEntrance from "@/components/BackgroundAnimate";
 
@@ -30,7 +29,7 @@ export const ContactForm = () => {
     phone: "",
     message: "",
   });
- 
+
   const [recaptchaReady, setRecaptchaReady] = useState(false);
 
   const PORT = process.env.NEXT_PUBLIC_API_URL;
@@ -143,7 +142,7 @@ export const ContactForm = () => {
       (error) => error !== ""
     );
     if (hasErrors) {
-      return; 
+      return;
     }
     const { name, email, phone, message } = form;
 
@@ -194,9 +193,9 @@ export const ContactForm = () => {
   return (
     <BackgroundEntrance>
       <div
-        id="contacto"
-        className="h-[90vh] z-100 flex flex-col items-center justify-evenly "
-      >
+      id="contacto"
+        className="h-[90vh] z-100 flex flex-col items-center justify-evenly  "
+        >
         <form
           onSubmit={handleSubmit}
           className={`fade-to-black flex flex-col justify-between gap-2 p-4  h-[30rem] w-96 mt-30 font-[family-name:var(--font-bellota)]`}
@@ -265,49 +264,7 @@ export const ContactForm = () => {
             Enviar
           </button>
         </form>
-          <div className="flex justify-center items-center gap-10 p-2">
-            <a
-              href="https://www.instagram.com/metamorfose.ph/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Image
-                src="/instagram-icon.png"
-                alt="logo"
-                width={40}
-                height={40}
-              ></Image>
-            </a>
-
-            <a
-              href="https://wa.me/5491123456789?text=Hola%20quiero%20hacer%20una%20consulta"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Image
-                src="/whatsapp-icon.png"
-                alt="logo"
-                width={40}
-                height={40}
-              ></Image>
-            </a>
-          </div>
-
       </div>
-      <footer className="flex justify-center items-center text-white font-[family-name:var(--font-bellota)] font-2xl">
-        <p>© 2025 Metamorfose-ph. Todos los derechos reservados.</p>
-        <p>
-          Diseñado y Desarrollado por{" "}
-          <a
-            className="animate-pulse"
-            href="https://www.linkedin.com/in/lucas-sebas/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Ls/Dev
-          </a>
-        </p>
-      </footer>
     </BackgroundEntrance>
   );
 };
