@@ -3,7 +3,7 @@ import Image from "next/image";
 import { CategoryComponent } from "../CategorySection";
 import { useEffect, useRef, useState } from "react";
 import { useInView, motion } from "framer-motion";
-
+import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 export const FotoComponent: React.FC<{ fotos: Ifotos[] }> = ({ fotos }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const estaEnVista = useInView(containerRef, { once: false });
@@ -28,6 +28,17 @@ export const FotoComponent: React.FC<{ fotos: Ifotos[] }> = ({ fotos }) => {
           <CategoryComponent />
         </div>
 
+          <OverlayScrollbarsComponent
+  id="scroolPersonalizado"
+          options={{ scrollbars: { autoHide: "scroll" } }}
+          style={{
+            maxHeight: "80vh",
+            height: "74vh",
+            overflowY: "auto",
+            transition: "duration 300ms ease in-out",
+          }}
+
+>
         <div
           
           className={`z-10 grid grid-cols-3 gap-1 px-8 sm:px-56   ${animar ? "fade-left" : ""}`}
@@ -46,6 +57,7 @@ export const FotoComponent: React.FC<{ fotos: Ifotos[] }> = ({ fotos }) => {
             );
           })}
         </div>
+          </OverlayScrollbarsComponent>
       </div>
     </motion.section>
   );
