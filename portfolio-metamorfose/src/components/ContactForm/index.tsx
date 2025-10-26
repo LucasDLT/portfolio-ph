@@ -132,12 +132,19 @@ export const ContactForm = () => {
     });
   };
 
-  const handleTextAreaChange = (e: React.FocusEvent<HTMLTextAreaElement>) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
-    });
-  };
+// reemplaza tu handleTextAreaChange por esta versión
+const handleTextAreaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const { name, value } = e.target;
+
+  // actualizar form
+  setForm((prev) => ({ ...prev, [name]: value }));
+
+  // validar con el nuevo valor (usamos snapshot combinando prev form y nuevo value)
+  const updatedForm = { ...form, [name]: value };
+  const validationErrors = validateForm(updatedForm);
+  setErrors(validationErrors);
+};
+
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
