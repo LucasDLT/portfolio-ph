@@ -22,7 +22,7 @@ export function HomeComponent() {
       initial={{ opacity: 1, y: 0 }}
       animate={estaEnVista ? { opacity: 1, y: 0 } : { }}
     >
-    <div id="home" className="relative z-0 overflow-x-hidden h-[100dvh]">
+    <div id="home" className="relative z-0 overflow-x-hidden h-[100dvh] ">
       <div className=" flex justify-between items-center mt-[-10]">
         <div className="relative m-3 w-9 h-9 sm:w-9 sm:h-9 md:w-10 md:h-10 lg:w-10 lg:h-10 xl:w-10  xl:h-10 2xl:w-10 2xl:h-10">
           <Image

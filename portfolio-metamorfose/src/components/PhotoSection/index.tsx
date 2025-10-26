@@ -18,7 +18,7 @@ export const FotoComponent: React.FC<{ fotos: Ifotos[] }> = ({ fotos }) => {
       <div
         ref={containerRef}
         id="portfolio"
-        className="bg-zinc-900 text-white min-h-screen p-4 md:p-8"
+        className="bg-black text-white min-h-screen p-4 md:p-8 "
       >
         <div className="mb-4 flex items-center justify-evenly relative">
           <h2 className="font-[family-name:var(--font-bellota)] text-2xl md:text-3xl">
@@ -29,7 +29,8 @@ export const FotoComponent: React.FC<{ fotos: Ifotos[] }> = ({ fotos }) => {
         </div>
 
         <div
-          className={`z-10 grid grid-cols-3 gap-1 md:grid-cols-3 lg:grid-cols-4 ${animar ? "fade-left" : ""}`}
+          
+          className={`z-10 grid grid-cols-3 gap-1 px-8 sm:px-56   ${animar ? "fade-left" : ""}`}
         >
           {fotos.map((foto) => {
             return (

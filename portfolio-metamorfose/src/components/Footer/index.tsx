@@ -5,7 +5,7 @@ import Image from "next/image";
 export const Footer = () => {
   return (
     <footer className="w-full bg-transparent">
-      <div className="max-w-6xl mx-auto px-6 py-6 flex flex-col md:flex-row items-center md:items-start justify-center md:justify-around gap-4 text-white font-[family-name:var(--font-bellota)] text-[0.8rem] lg:text-[0.8rem] border-t border-white/10">
+      <div className="max-w-6xl mx-auto px-6 py-6 flex flex-col md:flex-row items-center md:items-start justify-center md:justify-around gap-4 text-white font-[family-name:var(--font-bellota)] text-[0.8rem] lg:text-[0.8rem] md:border-t border-white/10 border-none">
         {/* LEFT / Mobile top (copyright) -> Desktop left */}
         <div className="flex flex-col items-center md:items-start text-center md:text-left space-y-1">
           <p className="leading-none">
@@ -83,7 +83,7 @@ export const Footer = () => {
               className="underline hover:text-gray-300"
             >
               Términos de Servicio
-            </a>{" "}
+            </a>
             de Google.
           </p>
         </div>
