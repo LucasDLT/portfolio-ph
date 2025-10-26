@@ -16,9 +16,7 @@ export function validateForm(form: IMail): Ierror {
     errors.name = "El nombre debe tener menos de 10 caracteres";
   } else if (/\d/.test(form.name)) {
     errors.name = "El nombre no puede contener números";
-  } else if (form.name.includes(" ")) {
-    errors.name = "El nombre no puede contener espacios";
-  }
+  } 
 
   // Validación email
   if (!form.email.trim()) {
