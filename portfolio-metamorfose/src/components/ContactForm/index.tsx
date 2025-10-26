@@ -3,6 +3,7 @@ import { IMail, Ierror } from "@/types/types";
 import { validateForm } from "@/helpers/validateForm";
 import { toast } from "sonner";
 import BackgroundEntrance from "@/components/BackgroundAnimate";
+import { Loader } from "../Loader";
 
 // Tipado global de reCAPTCHA
 declare global {
@@ -16,6 +17,7 @@ declare global {
     };
   }
 }
+
 export const ContactForm = () => {
   const [errors, setErrors] = useState<Ierror>({
     name: "",
@@ -31,6 +33,7 @@ export const ContactForm = () => {
   });
 
   const [recaptchaReady, setRecaptchaReady] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const PORT = process.env.NEXT_PUBLIC_API_URL;
   const SITE_KEY_RECAPTCHA = process.env.NEXT_PUBLIC_SITE_KEY_RECAPTCHA!;
@@ -42,7 +45,7 @@ export const ContactForm = () => {
       return;
     }
 
-    if (window.grecaptcha) {
+    if ((window).grecaptcha) {
       setRecaptchaReady(true);
       return;
     }
@@ -53,8 +56,7 @@ export const ContactForm = () => {
     script.defer = true;
 
     script.onload = () => {
-      // Esperar a que grecaptcha esté listo
-      window.grecaptcha.ready(() => {
+      window.grecaptcha?.ready(() => {
         setRecaptchaReady(true);
       });
     };
@@ -67,7 +69,12 @@ export const ContactForm = () => {
     document.head.appendChild(script);
 
     return () => {
-      document.head.removeChild(script);
+      // limpiar script si se desmonta
+      try {
+        document.head.removeChild(script);
+      } catch {
+        /* noop */
+      }
     };
   }, [SITE_KEY_RECAPTCHA]);
 
@@ -135,6 +142,10 @@ export const ContactForm = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    // prevenir doble submit
+    if (loading) return;
+
+    // validación previa
     const validationErrors = validateForm(form);
     setErrors(validationErrors);
 
@@ -142,17 +153,23 @@ export const ContactForm = () => {
       (error) => error !== ""
     );
     if (hasErrors) {
+      toast.error("Por favor completa los campos correctamente.");
       return;
     }
-    const { name, email, phone, message } = form;
+
+    setLoading(true);
+    // opcional: bloquear scroll global mientras se envía
+    document.body.style.overflow = "hidden";
 
     try {
       if (!recaptchaReady) {
+        toast.error("reCAPTCHA no está listo, intentá nuevamente en un momento.");
         return;
       }
 
       const token = await getRecaptchaToken("contact");
 
+      const { name, email, phone, message } = form;
       const payload = {
         name,
         email,
@@ -160,7 +177,6 @@ export const ContactForm = () => {
         message,
         recaptcha: token,
       };
-      console.log("Payload enviado al backend:", payload);
 
       const response = await fetch(`${PORT}/email`, {
         method: "POST",
@@ -169,13 +185,21 @@ export const ContactForm = () => {
         },
         body: JSON.stringify(payload),
       });
+
       if (!response.ok) {
-        throw new Error("Error en la petición");
+        // intentá leer error del body si lo hay
+        let serverMessage = "Error en la petición";
+        try {
+          const json = await response.json();
+          if (json?.message) serverMessage = json.message;
+        } catch {
+          /* noop */
+        }
+        throw new Error(serverMessage);
       }
 
-      const data = await response.json();
-      console.log(data);
-      toast.success("Correo enviado con exito");
+      await response.json();
+      toast.success("Correo enviado con éxito");
 
       setForm({ name: "", email: "", phone: "", message: "" });
       setErrors({
@@ -185,21 +209,36 @@ export const ContactForm = () => {
         message: "",
       });
     } catch (error) {
-      console.log(error);
-      toast.error("Error al enviar el correo");
+      console.error(error);
+      toast.error("Error al enviar el correo. Intentá más tarde.");
+    } finally {
+      // siempre limpiar loading y scroll lock
+      setLoading(false);
+      document.body.style.overflow = "";
     }
   };
 
   return (
     <BackgroundEntrance>
       <div
-      id="contacto"
-        className="h-[90vh] z-100 flex flex-col items-center justify-evenly  "
-        >
+        id="contacto"
+        className="h-[90vh] z-100 flex flex-col items-center justify-evenly relative"
+      >
         <form
           onSubmit={handleSubmit}
-          className={`fade-to-black flex flex-col justify-between gap-2 p-4  h-[30rem] w-96 mt-30 font-[family-name:var(--font-bellota)]`}
+          className={`relative fade-to-black flex flex-col justify-between gap-2 p-4  h-[30rem] w-96 mt-30 font-[family-name:var(--font-bellota)]`}
+          aria-busy={loading}
         >
+          {/* overlay loader dentro del form */}
+          {loading && (
+            <div
+              className="absolute inset-0 z-50 flex items-center justify-center bg-black/60 rounded"
+              aria-hidden="true"
+            >
+              <Loader />
+            </div>
+          )}
+
           <div className="flex flex-col text-center">
             <label htmlFor="name">Nombre</label>
             <input
@@ -209,6 +248,7 @@ export const ContactForm = () => {
               type="text"
               onChange={handleChange}
               value={form.name}
+              disabled={loading}
             />
             {errors.name && (
               <p className="text-red-400 text-sm">{errors.name}</p>
@@ -223,6 +263,7 @@ export const ContactForm = () => {
               id="email"
               onChange={handleChange}
               value={form.email}
+              disabled={loading}
             />
             {errors.email && (
               <p className="text-red-400 text-sm">{errors.email}</p>
@@ -237,6 +278,7 @@ export const ContactForm = () => {
               id="phone"
               onChange={handleChange}
               value={form.phone}
+              disabled={loading}
             />
             {errors.phone && (
               <p className="text-red-400 text-sm">{errors.phone}</p>
@@ -252,18 +294,33 @@ export const ContactForm = () => {
               rows={4}
               onChange={handleTextAreaChange}
               value={form.message}
+              disabled={loading}
             ></textarea>
             {errors.message && (
               <p className="text-red-400 text-sm">{errors.message}</p>
             )}
           </div>
+
           <button
             type="submit"
-            className="bg-gray-600 text-white py-1 rounded hover:bg-gray-500 transition-colors"
+            className="relative flex items-center justify-center bg-gray-600 text-white py-1 rounded hover:bg-gray-500 transition-colors disabled:opacity-60"
+            disabled={loading}
+            aria-disabled={loading}
           >
-            Enviar
+            {/* show small loader inside button if loading */}
+            {loading ? (
+              <span className="flex items-center gap-2">
+                <span className="sr-only">Enviando</span>
+                <Loader />
+                <span>Enviando...</span>
+              </span>
+            ) : (
+              "Enviar"
+            )}
           </button>
         </form>
+
+
       </div>
     </BackgroundEntrance>
   );
