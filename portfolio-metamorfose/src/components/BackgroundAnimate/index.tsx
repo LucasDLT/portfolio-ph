@@ -26,13 +26,13 @@ export default function BackgroundEntrance({ children }: Props) {
       {animar && (
         <>
           <motion.div
-            className="absolute top-0 left-0 h-full w-1/2 bg-zinc-900 z-0"
+            className="absolute top-0 left-0 h-full w-1/2 bg-black z-0"
             initial={{ x: '-100%' }}
             animate={{ x: 0 }}
             transition={{ duration: 0.5 }}
           />
           <motion.div
-            className="absolute top-0 right-0 h-full w-1/2 bg-zinc-900 z-0"
+            className="absolute top-0 right-0 h-full w-1/2 bg-black z-0"
             initial={{ x: '100%' }}
             animate={{ x: 0 }}
             transition={{ duration: 0.5 }}
