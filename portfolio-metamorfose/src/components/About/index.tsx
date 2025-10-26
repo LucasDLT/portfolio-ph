@@ -20,8 +20,8 @@ export const AboutComponent = () => {
             Mi mundo en pocas palabras
           </h1>
 
-          <section className="relative bg-stone-950 xl:bg-transparent rounded-sm text-gray-400 text-left h-full md:w-[50rem] flex items-center px-6">
-            <p className={`font-bold font-[family-name:var(--font-bellota)] tracking-widest text-[0.9rem] z-10 bg-stone-950/60 p-2 rounded-sm ${animar ? `fade-bottom` : ""}`}>
+          <section className="relative  bg-stone-950 xl:bg-transparent rounded-sm text-gray-400 text-left h-full md:w-[50rem] flex items-center px-6">
+            <p className={`font-bold font-[family-name:var(--font-bellota)] tracking-widest text-[0.9rem] z-10 bg-stone-950/60 p-2 rounded-sm  ${animar ? `fade-bottom` : ""}`}>
               ...Nacida en Brasil, la naturaleza siempre fue parte de mi esencia.
               Desde pequeña, el arte fue mi refugio: dibujar, crear, observar el
               mundo con otros ojos. Mi deseo de descubrir me llevó a explorar
@@ -49,7 +49,7 @@ export const AboutComponent = () => {
               alt="metamorfose-fondo"
               width={1200}
               height={1600}
-              className="object-cover w-full h-full"
+              className="object-cover w-full h-full mask-fade-mini"
             />
             {/* máscara */}
             <div className="absolute inset-0 bg-gradient-to-l from-black/45 via-black/25 to-transparent" />
