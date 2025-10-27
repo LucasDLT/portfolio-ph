@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { useInView, motion } from "framer-motion";
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 import  Modal  from "../ModalPreviewPhotos";
+import { Loader } from "../Loader";
 export const FotoComponent: React.FC<{ fotos: Ifotos[] }> = ({ fotos }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const estaEnVista = useInView(containerRef, { once: false });
@@ -59,7 +60,7 @@ export const FotoComponent: React.FC<{ fotos: Ifotos[] }> = ({ fotos }) => {
               animar ? "fade-left" : ""
             }`}
           >
-            {fotos.map((foto) => {
+            { fotos ? fotos.map((foto) => {
               return (
                 <div
                   key={foto.id}
@@ -75,7 +76,9 @@ export const FotoComponent: React.FC<{ fotos: Ifotos[] }> = ({ fotos }) => {
                   />
                 </div>
               );
-            })}
+            }):(<div
+            className="w-full aspect-square overflow-hidden rounded-sm">
+              <Loader/></div>)}
           </div>
         </OverlayScrollbarsComponent>
           <Modal isOpen={isModalOpen} onClose={closeModal}>
