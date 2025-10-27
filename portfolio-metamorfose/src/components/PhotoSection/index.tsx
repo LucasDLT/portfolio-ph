@@ -30,6 +30,7 @@ export const FotoComponent: React.FC<{ fotos: Ifotos[] }> = ({ fotos }) => {
   };
     const { url, title } = selectedImage || {};
   const imageUrl = url ? (typeof url === "string" ? url : URL.createObjectURL(url as File)) : "";
+  const hasFotos = Array.isArray(fotos) && fotos.length > 0;
   return (
     <motion.section>
       <div
@@ -60,7 +61,7 @@ export const FotoComponent: React.FC<{ fotos: Ifotos[] }> = ({ fotos }) => {
               animar ? "fade-left" : ""
             }`}
           >
-            { fotos ? fotos.map((foto) => {
+            { hasFotos ? fotos.map((foto) => {
               return (
                 <div
                   key={foto.id}
